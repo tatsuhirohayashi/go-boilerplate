@@ -1,0 +1,13 @@
+# ベースイメージ（最新安定版 Go + Alpine）
+FROM golang:1.25-alpine
+
+RUN apk update && apk add git
+
+WORKDIR /app
+
+# Airをインストール（go.modがなくてもインストール可能）
+RUN go install github.com/air-verse/air@v1.62.0
+
+EXPOSE 4000
+
+CMD ["air", "-c", ".air.toml"]
